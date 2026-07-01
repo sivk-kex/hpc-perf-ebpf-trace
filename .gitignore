@@ -1,0 +1,4 @@
+runs/
+.codegraph/
+__pycache__/
+harness/synth_traj_*

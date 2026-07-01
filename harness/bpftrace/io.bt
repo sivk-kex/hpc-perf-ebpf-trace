@@ -1,0 +1,16 @@
+#!/usr/bin/env bpftrace
+/*
+ * io.bt -- deliberately a stub, not a full script.
+ *
+ * KTD4: `perf trace -s` already gives write/fsync/pwrite syscall timing at
+ * the syscall layer without eBPF, and probes.py's probe_io() uses that path
+ * (see harness/probes.py: _run_perf_trace / _parse_perf_trace_summary).
+ * bpftrace here would just duplicate that for no new signal -- it only
+ * earns its keep once someone needs sub-syscall detail (e.g. block-layer
+ * latency via block_rq_issue/block_rq_complete), which U2 doesn't ask for.
+ *
+ * If/when that's needed, the shape mirrors comm.bt: tracepoint:syscalls:
+ * sys_enter_write / sys_enter_fsync / sys_enter_pwrite64 filtered by
+ * pid == $1, accumulate elapsed ns per call, printf a fixed-label summary
+ * in END for probes.py to regex.
+ */

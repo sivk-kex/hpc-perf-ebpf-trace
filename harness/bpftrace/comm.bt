@@ -1,0 +1,52 @@
+#!/usr/bin/env bpftrace
+/*
+ * comm.bt -- minimal socket comm timing for one pid ($1), KTD5.
+ * Traces sendto/recvfrom only -- not a full MPI/network profiler. Run
+ * under `timeout Ns` from probes.py, since bpftrace has no built-in
+ * duration flag; Ctrl-C also triggers END and prints the same summary.
+ *
+ * Single-node MPI usually rides shared memory (vader), not sockets, so
+ * these counters legitimately read 0 in that case -- a correct result,
+ * not a probe failure.
+ */
+
+BEGIN
+{
+	printf("comm.bt: tracing sendto/recvfrom for pid %d\n", $1);
+}
+
+tracepoint:syscalls:sys_enter_sendto,
+tracepoint:syscalls:sys_enter_recvfrom
+/pid == $1/
+{
+	@start[tid] = nsecs;
+}
+
+tracepoint:syscalls:sys_exit_sendto
+/pid == $1 && @start[tid]/
+{
+	@sendto_ns = @sendto_ns + (nsecs - @start[tid]);
+	@sendto_count = @sendto_count + 1;
+	delete(@start[tid]);
+}
+
+tracepoint:syscalls:sys_exit_recvfrom
+/pid == $1 && @start[tid]/
+{
+	@recvfrom_ns = @recvfrom_ns + (nsecs - @start[tid]);
+	@recvfrom_count = @recvfrom_count + 1;
+	delete(@start[tid]);
+}
+
+END
+{
+	// fixed labels so probes.py can regex this line reliably instead of
+	// depending on bpftrace's default map-dump formatting.
+	printf("sendto_ns=%d sendto_count=%d recvfrom_ns=%d recvfrom_count=%d\n",
+	    @sendto_ns, @sendto_count, @recvfrom_ns, @recvfrom_count);
+	clear(@start);
+	clear(@sendto_ns);
+	clear(@sendto_count);
+	clear(@recvfrom_ns);
+	clear(@recvfrom_count);
+}
