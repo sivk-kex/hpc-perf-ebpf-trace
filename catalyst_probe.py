@@ -36,6 +36,9 @@ def cmd_run(job_argv):
             os.killpg(pgid, signum)
         except ProcessLookupError:
             pass  # job already reaped (race between reap and a second signal)
+        # a probe's perf/bpftrace subprocess isn't in the job's process group
+        # -- without this it'd sit out its own timeout after the job's gone.
+        probes.kill_active_probe()
 
     old_handlers = {
         sig: signal.signal(sig, forward) for sig in (signal.SIGINT, signal.SIGTERM)

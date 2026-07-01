@@ -68,19 +68,49 @@ def detect_privilege():
 # perf stat / perf trace subprocess helpers (shared by several probes)
 # ---------------------------------------------------------------------------
 
+# ponytail: a probe's perf/bpftrace subprocess isn't in the wrapped job's
+# process group, so catalyst_probe.py forwarding SIGINT/SIGTERM to the job
+# alone leaves a live probe running out its own timeout unattended -- stash
+# the in-flight Popen here so the harness's signal handler can kill it too.
+_ACTIVE_PROC = {"proc": None}
+
+
+def kill_active_probe():
+    proc = _ACTIVE_PROC["proc"]
+    if proc is not None:
+        try:
+            proc.kill()
+        except ProcessLookupError:
+            pass
+
+
+def _run(cmd, timeout):
+    """subprocess.run(capture_output=True, text=True, timeout=...)-alike,
+    but keeps the live Popen in _ACTIVE_PROC for kill_active_probe()."""
+    proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    _ACTIVE_PROC["proc"] = proc
+    try:
+        stdout, stderr = proc.communicate(timeout=timeout)
+    except subprocess.TimeoutExpired:
+        proc.kill()
+        proc.communicate()
+        raise
+    finally:
+        _ACTIVE_PROC["proc"] = None
+    return stdout + stderr
+
+
 def _run_perf_stat(events, pid, timeout=5):
     """`perf stat -e <events> -p <pid> -- sleep 1` -- attach to a live pid for
     a bounded window using `sleep N` as perf's own duration timer. Returns
     combined stdout+stderr text (perf writes its stats table to stderr)."""
     cmd = ["perf", "stat", "-e", ",".join(events), "-p", str(pid), "--", "sleep", SAMPLE_S]
-    cp = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
-    return cp.stdout + cp.stderr
+    return _run(cmd, timeout)
 
 
 def _run_perf_trace(pid, timeout=5):
     cmd = ["perf", "trace", "-s", "-p", str(pid), "--", "sleep", SAMPLE_S]
-    cp = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
-    return cp.stdout + cp.stderr
+    return _run(cmd, timeout)
 
 
 def _perf_stat_probe(pid, priv, events, parse_fn):
@@ -338,11 +368,8 @@ def _parse_bpftrace_comm(text):
 
 def _probe_comm_bpftrace(pid, timeout=10):
     script = BPFTRACE_DIR / "comm.bt"
-    cp = subprocess.run(
-        ["timeout", SAMPLE_S, "bpftrace", str(script), str(pid)],
-        capture_output=True, text=True, timeout=timeout,
-    )
-    parsed = _parse_bpftrace_comm(cp.stdout + cp.stderr)
+    text = _run(["timeout", SAMPLE_S, "bpftrace", str(script), str(pid)], timeout)
+    parsed = _parse_bpftrace_comm(text)
     if parsed is None:
         return _unavailable("bpftrace produced no parseable output (script error or unsupported kernel)")
     total_s = parsed["sendto_s"] + parsed["recvfrom_s"]

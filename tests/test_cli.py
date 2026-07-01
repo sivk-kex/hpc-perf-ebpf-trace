@@ -42,6 +42,16 @@ class TestCLI(unittest.TestCase):
             proc = run_cli([sys.executable, "-c", "import sys; sys.exit(7)"], cwd=tmp)
             self.assertEqual(proc.returncode, 7)
 
+    def test_no_command_given(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            proc = subprocess.run(
+                [sys.executable, str(SCRIPT), "run", "--"],
+                cwd=tmp, capture_output=True, text=True,
+            )
+            self.assertEqual(proc.returncode, 2)
+            self.assertIn("no command given", proc.stderr)
+            self.assertFalse((Path(tmp) / "runs").exists())
+
     def test_runs_dir_created(self):
         with tempfile.TemporaryDirectory() as tmp:
             run_cli(["echo", "hi"], cwd=tmp)

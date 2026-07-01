@@ -5,6 +5,8 @@ real perf/bpftrace needed to run this suite (test-first per the build plan --
 these were written against the fixtures before the parser bodies).
 """
 import sys
+import threading
+import time
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -68,6 +70,17 @@ PERF_STAT_MEM_BW = """
 """
 
 
+PERF_STAT_MEM_BW_UNSUPPORTED = """
+ Performance counter stats for process id '12345':
+
+     <not supported> LLC-load-misses
+     <not supported> LLC-loads
+
+       1.000123456 seconds time elapsed
+
+"""
+
+
 class TestMemBwParser(unittest.TestCase):
     def test_extracts_rate(self):
         result = probes._parse_mem_bw(PERF_STAT_MEM_BW)
@@ -75,6 +88,13 @@ class TestMemBwParser(unittest.TestCase):
         self.assertEqual(result["unit"], "count/s")
         self.assertAlmostEqual(result["value"], 8431221 / 1.001042317, delta=10)
         self.assertEqual(result["detail"]["LLC-loads"], 51204933)
+
+    def test_unsupported_event_is_unavailable(self):
+        # "<not supported>" isn't a count line -- LLC-load-misses just never
+        # shows up in counts, same shape of gap as energy's unsupported case.
+        result = probes._parse_mem_bw(PERF_STAT_MEM_BW_UNSUPPORTED)
+        self.assertEqual(result["status"], "unavailable")
+        self.assertIn("reason", result)
 
 
 # ---------------------------------------------------------------------------
@@ -149,6 +169,16 @@ class TestIoParser(unittest.TestCase):
         self.assertEqual(counts["read_bytes"], 40960000)
         self.assertEqual(counts["write_bytes"], 20480000)
 
+    def test_measured_zero_bytes_is_ok_not_unavailable(self):
+        # a job that genuinely wrote 0 bytes (pre == post) is a real
+        # measurement, not a failure -- must not collapse into the same
+        # "unavailable" shape as pid-gone/no-permission (test_io_missing_
+        # perf_and_dead_pid below covers that case).
+        zero_io = {"read_bytes": 0, "write_bytes": 0}
+        result = probes.probe_io(pid=1, priv=NO_TOOLS_PRIV, pre_io=zero_io, post_io=zero_io)
+        self.assertEqual(result["status"], "ok")
+        self.assertEqual(result["value"], 0)
+
 
 # ---------------------------------------------------------------------------
 # bonus: comm bpftrace summary line parser
@@ -217,7 +247,7 @@ class TestDegradeOnMissingTool(unittest.TestCase):
         # blows up (binary vanished, sandboxed out, whatever) -- must still
         # degrade cleanly rather than raise out of the probe.
         priv = dict(NO_TOOLS_PRIV, has_perf=True)
-        with mock.patch.object(probes.subprocess, "run", side_effect=FileNotFoundError("no perf")):
+        with mock.patch.object(probes.subprocess, "Popen", side_effect=FileNotFoundError("no perf")):
             result = probes.probe_energy(pid=1, priv=priv)
         self.assertEqual(result["status"], "unavailable")
         self.assertIn("no perf", result["reason"])
@@ -227,6 +257,40 @@ class TestDegradeOnMissingTool(unittest.TestCase):
             priv = probes.detect_privilege()
         self.assertFalse(priv["has_perf"])
         self.assertFalse(priv["has_bpftrace"])
+
+
+# ---------------------------------------------------------------------------
+# (e) signal-forwarding gap: a probe's subprocess isn't in the job's process
+# group, so catalyst_probe.py's signal handler needs a direct way to kill it.
+# ---------------------------------------------------------------------------
+
+class TestActiveProcKill(unittest.TestCase):
+    def test_kill_active_probe_terminates_in_flight_subprocess(self):
+        result = {}
+
+        def worker():
+            try:
+                probes._run(["sleep", "5"], timeout=10)
+            except Exception as e:  # noqa: BLE001
+                result["exc"] = e
+
+        t = threading.Thread(target=worker)
+        t.start()
+        for _ in range(50):  # wait for _run to register the Popen
+            if probes._ACTIVE_PROC["proc"] is not None:
+                break
+            time.sleep(0.02)
+        self.assertIsNotNone(probes._ACTIVE_PROC["proc"], "worker never registered its subprocess")
+
+        start = time.monotonic()
+        probes.kill_active_probe()
+        t.join(timeout=3)
+        self.assertFalse(t.is_alive(), "sleep 5 outlived kill_active_probe()")
+        self.assertLess(time.monotonic() - start, 3)
+        self.assertIsNone(probes._ACTIVE_PROC["proc"])
+
+    def test_kill_active_probe_is_noop_when_nothing_running(self):
+        probes.kill_active_probe()  # must not raise
 
 
 if __name__ == "__main__":
