@@ -103,6 +103,10 @@ def cmd_run(job_argv):
     job_end = job_end_box["t"]
     stop_sampler.set()
     sampler.join(timeout=1)
+    if sampler.is_alive():
+        # ponytail: don't trust a snapshot the sampler might still be mid-write
+        # on -- flag it instead of silently reporting stale io bytes as fact.
+        print("catalyst_probe: io sampler did not stop in time, post_io snapshot may be stale", file=sys.stderr)
 
     post_task = probes.read_task_stats(proc.pid)
     post_io = io_latest["snap"]
