@@ -9,7 +9,7 @@ import platform
 import subprocess
 from pathlib import Path
 
-_REPO_ROOT = Path(__file__).resolve().parent.parent
+_REPO_ROOT = Path(__file__).resolve().parent
 
 PROBE_ORDER = ["energy", "mem_bw", "imbalance", "io", "comm"]
 

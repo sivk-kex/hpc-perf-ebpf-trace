@@ -1,4 +1,4 @@
-"""Tests for harness/catalyst_probe.py -- CLI skeleton (U1)."""
+"""Tests for catalyst_probe.py -- CLI skeleton (U1)."""
 import json
 import subprocess
 import sys
@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-SCRIPT = Path(__file__).resolve().parent.parent / "harness" / "catalyst_probe.py"
+SCRIPT = Path(__file__).resolve().parent.parent / "catalyst_probe.py"
 
 
 def run_cli(job_args, cwd):

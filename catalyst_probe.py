@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """catalyst_probe.py -- launch a command, record wall-clock, write a report.
 
-U1: harness skeleton. U2: the 5 probes (harness/probes.py) are wired into
+U1: harness skeleton. U2: the 5 probes (probes.py) are wired into
 `run` below and populate report["probes"]. U3: report shaping/rendering
-moved out to harness/report.py -- this file just gathers meta/probes and
+moved out to report.py -- this file just gathers meta/probes and
 writes the files.
 """
 import argparse

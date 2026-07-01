@@ -16,8 +16,8 @@ import sys
 import time
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-CLI = REPO_ROOT / "harness" / "catalyst_probe.py"
+REPO_ROOT = Path(__file__).resolve().parent
+CLI = REPO_ROOT / "catalyst_probe.py"
 
 
 def _latest_report(cwd):

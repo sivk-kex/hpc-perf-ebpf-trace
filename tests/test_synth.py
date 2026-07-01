@@ -1,4 +1,4 @@
-"""Tests for harness/synthetic_workload.py -- synthetic validation workload (U4).
+"""Tests for synthetic_workload.py -- synthetic validation workload (U4).
 
 Invoked through catalyst_probe.py's own CLI, same pattern as test_cli.py, so
 this exercises the whole harness end-to-end, not just the workload script.
@@ -11,8 +11,8 @@ import unittest
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-CLI = REPO_ROOT / "harness" / "catalyst_probe.py"
-WORKLOAD = REPO_ROOT / "harness" / "synthetic_workload.py"
+CLI = REPO_ROOT / "catalyst_probe.py"
+WORKLOAD = REPO_ROOT / "synthetic_workload.py"
 
 
 def run_synth(flag_args, cwd):

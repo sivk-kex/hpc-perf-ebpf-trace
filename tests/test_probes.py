@@ -1,4 +1,4 @@
-"""Tests for harness/probes.py -- the 5 signal probes (U2).
+"""Tests for probes.py -- the 5 signal probes (U2).
 
 Parser/logic tests only: fixture text in, asserted values out. No root, no
 real perf/bpftrace needed to run this suite (test-first per the build plan --
@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "harness"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import probes  # noqa: E402
 
 

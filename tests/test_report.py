@@ -1,10 +1,10 @@
-"""Tests for harness/report.py -- U3 report aggregation (pure functions)."""
+"""Tests for report.py -- U3 report aggregation (pure functions)."""
 import sys
 import unittest
 import unittest.mock
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "harness"))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import report  # noqa: E402
 
 

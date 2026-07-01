@@ -23,7 +23,7 @@ from array import array
 
 # ponytail: must outlast catalyst_probe's live-probe attach windows (energy,
 # mem_bw, comm each hold the job for perf/bpftrace's SAMPLE_S=1s, run
-# sequentially -> ~3s worst case per harness/probes.py) so those probes have
+# sequentially -> ~3s worst case per probes.py) so those probes have
 # a running job left to sample, not just "a couple of seconds" for its own sake.
 DURATION_S = 4.0
 ARRAY_LEN = 500_000        # 4MB of doubles per thread -- real traffic, not a laptop-killer

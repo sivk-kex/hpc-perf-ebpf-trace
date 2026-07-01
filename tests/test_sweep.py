@@ -1,4 +1,4 @@
-"""Tests for harness/pilot_sweep.py -- U5 pilot sweep runner.
+"""Tests for pilot_sweep.py -- U5 pilot sweep runner.
 
 2 configs x 1 repeat against synthetic_workload.py (io on vs off) -- proves
 the sweep mechanics (multi-config x multi-repeat -> aggregate -> compare)
@@ -11,10 +11,10 @@ import unittest
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(REPO_ROOT / "harness"))
+sys.path.insert(0, str(REPO_ROOT))
 import pilot_sweep  # noqa: E402
 
-WORKLOAD = REPO_ROOT / "harness" / "synthetic_workload.py"
+WORKLOAD = REPO_ROOT / "synthetic_workload.py"
 
 SPEC = {
     "repeats": 1,
