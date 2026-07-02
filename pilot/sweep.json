@@ -1,0 +1,7 @@
+{
+  "repeats": 3,
+  "configs": [
+    {"label": "disk_io_high", "argv": ["pw.x", "-in", "pilot/si_disk_high.in"]},
+    {"label": "disk_io_low",  "argv": ["pw.x", "-in", "pilot/si_disk_low.in"]}
+  ]
+}

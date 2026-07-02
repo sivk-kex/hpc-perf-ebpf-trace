@@ -1,0 +1,31 @@
+&CONTROL
+  calculation = 'md'
+  restart_mode = 'from_scratch'
+  prefix = 'si_pilot'
+  pseudo_dir = '/usr/share/espresso/pseudo/'
+  outdir = './out_high/'
+  disk_io = 'high'
+  nstep = 50
+  dt = 20.0
+  verbosity = 'low'
+/
+&SYSTEM
+  ibrav = 2
+  celldm(1) = 10.20
+  nat = 2
+  ntyp = 1
+  ecutwfc = 45.0
+/
+&ELECTRONS
+  conv_thr = 1.0d-8
+/
+&IONS
+  ion_temperature = 'not_controlled'
+/
+ATOMIC_SPECIES
+ Si  28.0855  Si.pbe-rrkj.UPF
+ATOMIC_POSITIONS (alat)
+ Si 0.00 0.00 0.00
+ Si 0.25 0.25 0.25
+K_POINTS (automatic)
+ 6 6 6 0 0 0
