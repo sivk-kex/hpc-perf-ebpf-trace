@@ -66,6 +66,22 @@ python3 pilot_sweep.py --spec pilot/sweep.json
 Raw per-repeat reports and the aggregated comparison:
 `pilot/sweep-results/sweep.json`, `pilot/sweep-results/comparison.md`.
 
+## Multi-rank exploratory check (n=1, not aggregated into the headline numbers)
+Ran `mpirun --oversubscribe -np 2 pw.x -in pilot/si_disk_high.in` under
+`catalyst_probe.py` once. (`--oversubscribe` needed: OpenMPI's hwloc
+topology detection under-reports available slots on this Azure VM despite
+`nproc`=2.) Exit 0, wall 50.8s. `io`: 35,131,392 bytes_written (plausible,
+higher than the single-rank ~24.7e6 mean). `comm`: still 0s. Root cause:
+`catalyst_probe` attaches probes to the single PID of the wrapped command
+(`proc.pid` in `catalyst_probe.py`); `mpirun` forks separate rank
+processes, and `perf trace -p <mpirun_pid>` does not follow those forks, so
+inter-rank MPI traffic is invisible to the `comm` probe as currently built.
+Not re-run to n=10 — oversubscription contention on a 2-vCPU VM confounds
+wall-clock (parallelism here is contention, not real speedup), and `comm`
+would stay 0 regardless of n. Recorded as a verified limitation
+(`paper3_conference.tex` Section 5), not folded into Table~1's headline
+numbers.
+
 ## Honest caveats (do not overstate in the paper)
 - n=10 repeats per config; io-bytes CV is ~5.8% (high) / ~5.9% (low) — the
   ~20% delta is a clean separation now, but still one job, one axis, one
