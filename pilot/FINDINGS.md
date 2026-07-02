@@ -21,36 +21,38 @@ a bug.
 QE's `disk_io` control parameter: `high` (dumps wavefunctions to disk every
 MD step) vs. `low` (skips per-step wavefunction dumps). This is the
 trajectory/checkpoint-write-frequency axis Section~2's near-absent I/O
-hypothesis was about. 2 configs x 3 repeats, via `pilot_sweep.py`.
+hypothesis was about. 2 configs x 10 repeats, via `pilot_sweep.py` (bumped
+from an initial n=3 pilot once the VM was confirmed reusable — same configs,
+tighter stats, no change in scope or claims).
 
 ## 1. Measured bottleneck, absolute units
 `io` probe (`perf trace` + `/proc/<pid>/io`), bytes written:
-- `disk_io_high`: mean 2.46e7 B, stdev 2.085e6 B (n=3)
-- `disk_io_low`: mean 2.141e7 B, stdev 3.394e5 B (n=3)
+- `disk_io_high`: mean 2.479e7 B, stdev 1.431e6 B (n=10)
+- `disk_io_low`: mean 2.066e7 B, stdev 1.217e6 B (n=10)
 
-~15% more bytes written under `disk_io=high`, outside the combined 1-sigma
-band.
+~20% more bytes written under `disk_io=high`. The gap (4.13e6 B) is ~3x
+either config's own stdev — a clean separation, not a borderline one.
 
 ## 2. Aggregate metric, shown blind to it
 Wall-clock:
-- `disk_io_high`: mean 40.896s, stdev 0.353s
-- `disk_io_low`: mean 40.493s, stdev 0.195s
+- `disk_io_high`: mean 40.787s, stdev 0.408s
+- `disk_io_low`: mean 40.527s, stdev 0.154s
 
-~1% difference — statistically indistinguishable given the stdevs. A
+~0.6% difference — statistically indistinguishable given the stdevs. A
 profiler reporting wall-clock alone would show these two configs as the
 same run.
 
 ## 3. Config-delta comparison
-The two configs differ *only* in `disk_io`. Wall-clock: flat (~1%, within
-noise). `io` bytes written: ~15% apart, outside noise. The delta is visible
-in the kernel-level probe and invisible in the aggregate metric — this is
-the paper's claim, demonstrated once.
+The two configs differ *only* in `disk_io`. Wall-clock: flat (~0.6%, within
+noise). `io` bytes written: ~20% apart, well outside noise (gap ~3x either
+stdev). The delta is visible in the kernel-level probe and invisible in the
+aggregate metric — this is the paper's claim, demonstrated with n=10.
 
 Other probes this run: `comm` = 0s both configs (single rank, no MPI
-traffic — expected, not a finding). `imbalance` (busy:idle) 129 vs 135.6,
-stdev 9.06 vs 1.97 — noisy, not a clean secondary signal, not claimed as a
-finding. `energy`/`mem_bw`: unavailable both configs (hypervisor-blocked,
-expected).
+traffic — expected, not a finding). `imbalance` (busy:idle) 125 vs 132.3,
+stdev 35.6 vs 7.91 — got noisier at n=10, confirms it's not a clean
+secondary signal, not claimed as a finding. `energy`/`mem_bw`: unavailable
+both configs (hypervisor-blocked, expected).
 
 ## 4. Repro
 ```
@@ -65,9 +67,9 @@ Raw per-repeat reports and the aggregated comparison:
 `pilot/sweep-results/sweep.json`, `pilot/sweep-results/comparison.md`.
 
 ## Honest caveats (do not overstate in the paper)
-- n=3 repeats per config; `disk_io_high`'s io-bytes stdev (2.09e6 on a
-  2.46e7 mean, ~8.5% CV) means the ~15% delta is real but not a large
-  margin — say "measurable", not "dramatic".
+- n=10 repeats per config; io-bytes CV is ~5.8% (high) / ~5.9% (low) — the
+  ~20% delta is a clean separation now, but still one job, one axis, one
+  VM — say "measurable and consistent", not "generalizable".
 - Single MPI rank, single node: this pilot does not exercise the `comm`
   probe or multi-rank imbalance at all — it demonstrates the *method*, not
   a claim about where time goes in production-scale catalysis runs.

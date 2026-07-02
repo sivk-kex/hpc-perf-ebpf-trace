@@ -1,11 +1,11 @@
 {
-  "repeats": 3,
+  "repeats": 10,
   "aggregates": {
     "disk_io_high": {
-      "repeats": 3,
+      "repeats": 10,
       "wall_s": {
-        "mean": 40.89563157233331,
-        "stdev": 0.3527215499121653
+        "mean": 40.787033824400005,
+        "stdev": 0.4077562688597279
       },
       "probes": {
         "energy": {
@@ -20,22 +20,22 @@
           "unit": "s"
         },
         "io": {
-          "mean": 24604672,
-          "stdev": 2084839.8584063957,
+          "mean": 24786124.8,
+          "stdev": 1430887.637541956,
           "unit": "bytes_written"
         },
         "imbalance": {
-          "mean": 128.9901598544485,
-          "stdev": 9.057389848889356,
+          "mean": 125.04674492355771,
+          "stdev": 35.59348491405921,
           "unit": "busy:idle (straggler thread)"
         }
       }
     },
     "disk_io_low": {
-      "repeats": 3,
+      "repeats": 10,
       "wall_s": {
-        "mean": 40.49324194566665,
-        "stdev": 0.19463825552138966
+        "mean": 40.52708437440002,
+        "stdev": 0.15414706559749158
       },
       "probes": {
         "energy": {
@@ -50,13 +50,13 @@
           "unit": "s"
         },
         "io": {
-          "mean": 21412522.666666668,
-          "stdev": 339358.81162765366,
+          "mean": 20656128,
+          "stdev": 1216901.923293556,
           "unit": "bytes_written"
         },
         "imbalance": {
-          "mean": 135.55961455371846,
-          "stdev": 1.9706977180128555,
+          "mean": 132.31627473582412,
+          "stdev": 7.910078035984968,
           "unit": "busy:idle (straggler thread)"
         }
       }
@@ -70,10 +70,10 @@
           "-in",
           "pilot/si_disk_high.in"
         ],
-        "pid": 4250,
-        "pgid": 4250,
+        "pid": 1082,
+        "pgid": 1082,
         "exit_code": 0,
-        "wall_s": 41.27234827299998,
+        "wall_s": 41.82187795899999,
         "probes": {
           "energy": {
             "value": null,
@@ -97,32 +97,32 @@
             "detail": {}
           },
           "io": {
-            "value": 26427392,
+            "value": 26456064,
             "unit": "bytes_written",
             "source": "perf_trace+proc",
             "status": "ok",
             "detail": {
               "syscall_time_s": {},
               "bytes": {
-                "read_bytes": 0,
-                "write_bytes": 26427392
+                "read_bytes": 20434944,
+                "write_bytes": 26456064
               }
             }
           },
           "imbalance": {
-            "value": 135.50598319442943,
+            "value": 24.165432715748622,
             "unit": "busy:idle (straggler thread)",
             "source": "proc",
             "status": "ok",
             "detail": {
               "per_thread": {
-                "4250": {
-                  "busy_ticks": 4097,
-                  "idle_ticks": 30.23482729999796,
-                  "ratio": 135.50598319442943
+                "1082": {
+                  "busy_ticks": 4016,
+                  "idle_ticks": 166.1877958999994,
+                  "ratio": 24.165432715748622
                 }
               },
-              "straggler_tid": "4250",
+              "straggler_tid": "1082",
               "clk_tck": 100
             }
           }
@@ -147,10 +147,10 @@
           "-in",
           "pilot/si_disk_high.in"
         ],
-        "pid": 4310,
-        "pgid": 4310,
+        "pid": 1112,
+        "pgid": 1112,
         "exit_code": 0,
-        "wall_s": 40.84134740799993,
+        "wall_s": 40.63192608199999,
         "probes": {
           "energy": {
             "value": null,
@@ -174,7 +174,7 @@
             "detail": {}
           },
           "io": {
-            "value": 22331392,
+            "value": 22638592,
             "unit": "bytes_written",
             "source": "perf_trace+proc",
             "status": "ok",
@@ -182,24 +182,24 @@
               "syscall_time_s": {},
               "bytes": {
                 "read_bytes": 0,
-                "write_bytes": 22331392
+                "write_bytes": 22638592
               }
             }
           },
           "imbalance": {
-            "value": 118.64745139651953,
+            "value": 138.18566578097418,
             "unit": "busy:idle (straggler thread)",
             "source": "proc",
             "status": "ok",
             "detail": {
               "per_thread": {
-                "4310": {
-                  "busy_ticks": 4050,
-                  "idle_ticks": 34.134740799993324,
-                  "ratio": 118.64745139651953
+                "1112": {
+                  "busy_ticks": 4034,
+                  "idle_ticks": 29.192608199999086,
+                  "ratio": 138.18566578097418
                 }
               },
-              "straggler_tid": "4310",
+              "straggler_tid": "1112",
               "clk_tck": 100
             }
           }
@@ -224,10 +224,472 @@
           "-in",
           "pilot/si_disk_high.in"
         ],
-        "pid": 4368,
-        "pgid": 4368,
+        "pid": 1139,
+        "pgid": 1139,
         "exit_code": 0,
-        "wall_s": 40.573199036000005,
+        "wall_s": 40.39550864399999,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 23678976,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 23678976
+              }
+            }
+          },
+          "imbalance": {
+            "value": 135.69823020135297,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1139": {
+                  "busy_ticks": 4010,
+                  "idle_ticks": 29.550864399998773,
+                  "ratio": 135.69823020135297
+                }
+              },
+              "straggler_tid": "1139",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_high.in"
+        ],
+        "pid": 1166,
+        "pgid": 1166,
+        "exit_code": 0,
+        "wall_s": 40.660730454,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 26451968,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 26451968
+              }
+            }
+          },
+          "imbalance": {
+            "value": 138.85714222425227,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1166": {
+                  "busy_ticks": 4037,
+                  "idle_ticks": 29.07304540000041,
+                  "ratio": 138.85714222425227
+                }
+              },
+              "straggler_tid": "1166",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_high.in"
+        ],
+        "pid": 1193,
+        "pgid": 1193,
+        "exit_code": 0,
+        "wall_s": 40.70972151000001,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 22900736,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 22900736
+              }
+            }
+          },
+          "imbalance": {
+            "value": 139.51328639699142,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1193": {
+                  "busy_ticks": 4042,
+                  "idle_ticks": 28.97215100000085,
+                  "ratio": 139.51328639699142
+                }
+              },
+              "straggler_tid": "1193",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_high.in"
+        ],
+        "pid": 1220,
+        "pgid": 1220,
+        "exit_code": 0,
+        "wall_s": 40.39252352,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 25067520,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 25067520
+              }
+            }
+          },
+          "imbalance": {
+            "value": 132.5186220231757,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1220": {
+                  "busy_ticks": 4009,
+                  "idle_ticks": 30.25235199999952,
+                  "ratio": 132.5186220231757
+                }
+              },
+              "straggler_tid": "1220",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_high.in"
+        ],
+        "pid": 1250,
+        "pgid": 1250,
+        "exit_code": 0,
+        "wall_s": 41.02384748400004,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 24100864,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 24100864
+              }
+            }
+          },
+          "imbalance": {
+            "value": 129.7126855412177,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1250": {
+                  "busy_ticks": 4071,
+                  "idle_ticks": 31.384748400004355,
+                  "ratio": 129.7126855412177
+                }
+              },
+              "straggler_tid": "1250",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_high.in"
+        ],
+        "pid": 1291,
+        "pgid": 1291,
+        "exit_code": 0,
+        "wall_s": 40.66697131300003,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 25059328,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 25059328
+              }
+            }
+          },
+          "imbalance": {
+            "value": 135.93905617407495,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1291": {
+                  "busy_ticks": 4037,
+                  "idle_ticks": 29.697131300003093,
+                  "ratio": 135.93905617407495
+                }
+              },
+              "straggler_tid": "1291",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_high.in"
+        ],
+        "pid": 1321,
+        "pgid": 1321,
+        "exit_code": 0,
+        "wall_s": 40.78844326699999,
         "probes": {
           "energy": {
             "value": null,
@@ -264,19 +726,96 @@
             }
           },
           "imbalance": {
-            "value": 132.81704497239653,
+            "value": 135.6706767320065,
             "unit": "busy:idle (straggler thread)",
             "source": "proc",
             "status": "ok",
             "detail": {
               "per_thread": {
-                "4368": {
-                  "busy_ticks": 4027,
-                  "idle_ticks": 30.319903600000544,
-                  "ratio": 132.81704497239653
+                "1321": {
+                  "busy_ticks": 4049,
+                  "idle_ticks": 29.84432669999933,
+                  "ratio": 135.6706767320065
                 }
               },
-              "straggler_tid": "4368",
+              "straggler_tid": "1321",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_high.in"
+        ],
+        "pid": 1351,
+        "pgid": 1351,
+        "exit_code": 0,
+        "wall_s": 40.77878801100002,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 26451968,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 26451968
+              }
+            }
+          },
+          "imbalance": {
+            "value": 140.20665144578277,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1351": {
+                  "busy_ticks": 4049,
+                  "idle_ticks": 28.87880110000151,
+                  "ratio": 140.20665144578277
+                }
+              },
+              "straggler_tid": "1351",
               "clk_tck": 100
             }
           }
@@ -303,10 +842,10 @@
           "-in",
           "pilot/si_disk_low.in"
         ],
-        "pid": 4395,
-        "pgid": 4395,
+        "pid": 1378,
+        "pgid": 1378,
         "exit_code": 0,
-        "wall_s": 40.30036148799991,
+        "wall_s": 40.34193051099999,
         "probes": {
           "energy": {
             "value": null,
@@ -330,32 +869,32 @@
             "detail": {}
           },
           "io": {
-            "value": 21020672,
+            "value": 19296256,
             "unit": "bytes_written",
             "source": "perf_trace+proc",
             "status": "ok",
             "detail": {
               "syscall_time_s": {},
               "bytes": {
-                "read_bytes": 0,
-                "write_bytes": 21020672
+                "read_bytes": 20480,
+                "write_bytes": 19296256
               }
             }
           },
           "imbalance": {
-            "value": 137.79375589924211,
+            "value": 110.4631933061909,
             "unit": "busy:idle (straggler thread)",
             "source": "proc",
             "status": "ok",
             "detail": {
               "per_thread": {
-                "4395": {
-                  "busy_ticks": 4001,
-                  "idle_ticks": 29.03614879999077,
-                  "ratio": 137.79375589924211
+                "1378": {
+                  "busy_ticks": 3998,
+                  "idle_ticks": 36.193051099998684,
+                  "ratio": 110.4631933061909
                 }
               },
-              "straggler_tid": "4395",
+              "straggler_tid": "1378",
               "clk_tck": 100
             }
           }
@@ -380,10 +919,164 @@
           "-in",
           "pilot/si_disk_low.in"
         ],
-        "pid": 4428,
-        "pgid": 4428,
+        "pid": 1405,
+        "pgid": 1405,
         "exit_code": 0,
-        "wall_s": 40.48977272900004,
+        "wall_s": 40.51758848199995,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 19185664,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 19185664
+              }
+            }
+          },
+          "imbalance": {
+            "value": 135.15308028624113,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1405": {
+                  "busy_ticks": 4022,
+                  "idle_ticks": 29.7588481999951,
+                  "ratio": 135.15308028624113
+                }
+              },
+              "straggler_tid": "1405",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_low.in"
+        ],
+        "pid": 1432,
+        "pgid": 1432,
+        "exit_code": 0,
+        "wall_s": 40.584108474000004,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 21602304,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 21602304
+              }
+            }
+          },
+          "imbalance": {
+            "value": 136.99027250741312,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1432": {
+                  "busy_ticks": 4029,
+                  "idle_ticks": 29.41084740000042,
+                  "ratio": 136.99027250741312
+                }
+              },
+              "straggler_tid": "1432",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_low.in"
+        ],
+        "pid": 1459,
+        "pgid": 1459,
+        "exit_code": 0,
+        "wall_s": 40.484029354000086,
         "probes": {
           "energy": {
             "value": null,
@@ -420,19 +1113,19 @@
             }
           },
           "imbalance": {
-            "value": 134.068232737725,
+            "value": 132.1582915312469,
             "unit": "busy:idle (straggler thread)",
             "source": "proc",
             "status": "ok",
             "detail": {
               "per_thread": {
-                "4428": {
-                  "busy_ticks": 4019,
-                  "idle_ticks": 29.977272900003754,
-                  "ratio": 134.068232737725
+                "1459": {
+                  "busy_ticks": 4018,
+                  "idle_ticks": 30.402935400008573,
+                  "ratio": 132.1582915312469
                 }
               },
-              "straggler_tid": "4428",
+              "straggler_tid": "1459",
               "clk_tck": 100
             }
           }
@@ -457,10 +1150,10 @@
           "-in",
           "pilot/si_disk_low.in"
         ],
-        "pid": 4455,
-        "pgid": 4455,
+        "pid": 1491,
+        "pgid": 1491,
         "exit_code": 0,
-        "wall_s": 40.68959161999999,
+        "wall_s": 40.77976917000001,
         "probes": {
           "energy": {
             "value": null,
@@ -497,19 +1190,404 @@
             }
           },
           "imbalance": {
-            "value": 134.81685502418824,
+            "value": 135.03723548355165,
             "unit": "busy:idle (straggler thread)",
             "source": "proc",
             "status": "ok",
             "detail": {
               "per_thread": {
-                "4455": {
-                  "busy_ticks": 4039,
-                  "idle_ticks": 29.95916199999874,
-                  "ratio": 134.81685502418824
+                "1491": {
+                  "busy_ticks": 4048,
+                  "idle_ticks": 29.976917000000867,
+                  "ratio": 135.03723548355165
                 }
               },
-              "straggler_tid": "4455",
+              "straggler_tid": "1491",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_low.in"
+        ],
+        "pid": 1518,
+        "pgid": 1518,
+        "exit_code": 0,
+        "wall_s": 40.46381679199999,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 21590016,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 21590016
+              }
+            }
+          },
+          "imbalance": {
+            "value": 132.18492544678534,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1518": {
+                  "busy_ticks": 4016,
+                  "idle_ticks": 30.38167919999887,
+                  "ratio": 132.18492544678534
+                }
+              },
+              "straggler_tid": "1518",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_low.in"
+        ],
+        "pid": 1548,
+        "pgid": 1548,
+        "exit_code": 0,
+        "wall_s": 40.47465683000007,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 21602304,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 21602304
+              }
+            }
+          },
+          "imbalance": {
+            "value": 136.36201814833282,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1548": {
+                  "busy_ticks": 4018,
+                  "idle_ticks": 29.465683000007175,
+                  "ratio": 136.36201814833282
+                }
+              },
+              "straggler_tid": "1548",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_low.in"
+        ],
+        "pid": 1575,
+        "pgid": 1575,
+        "exit_code": 0,
+        "wall_s": 40.601805214000024,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 19308544,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 19308544
+              }
+            }
+          },
+          "imbalance": {
+            "value": 133.52983358331525,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1575": {
+                  "busy_ticks": 4030,
+                  "idle_ticks": 30.180521400002362,
+                  "ratio": 133.52983358331525
+                }
+              },
+              "straggler_tid": "1575",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_low.in"
+        ],
+        "pid": 1602,
+        "pgid": 1602,
+        "exit_code": 0,
+        "wall_s": 40.29053938900006,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 21577728,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 21577728
+              }
+            }
+          },
+          "imbalance": {
+            "value": 137.67496427133946,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1602": {
+                  "busy_ticks": 4000,
+                  "idle_ticks": 29.05393890000596,
+                  "ratio": 137.67496427133946
+                }
+              },
+              "straggler_tid": "1602",
+              "clk_tck": 100
+            }
+          }
+        },
+        "provenance": {
+          "kernel": "6.8.0-1059-azure",
+          "perf_version": "perf version 6.8.12",
+          "privilege_path": {
+            "energy": null,
+            "mem_bw": null,
+            "comm": "perf_trace",
+            "io": "perf_trace+proc",
+            "imbalance": "proc"
+          },
+          "harness_git_sha": "f463b2be5ff2d7b1d9cde72e9bfdc10a4ac7a107",
+          "host": "catalyst-pilot-vm"
+        }
+      },
+      {
+        "command": [
+          "pw.x",
+          "-in",
+          "pilot/si_disk_low.in"
+        ],
+        "pid": 1629,
+        "pgid": 1629,
+        "exit_code": 0,
+        "wall_s": 40.73259952800004,
+        "probes": {
+          "energy": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "no RAPL energy events in perf stat output (unsupported or no permission)"
+          },
+          "mem_bw": {
+            "value": null,
+            "unit": null,
+            "source": null,
+            "status": "unavailable",
+            "reason": "LLC-load-misses not counted (unsupported event or no permission)"
+          },
+          "comm": {
+            "value": 0,
+            "unit": "s",
+            "source": "perf_trace",
+            "status": "ok",
+            "detail": {}
+          },
+          "io": {
+            "value": 19181568,
+            "unit": "bytes_written",
+            "source": "perf_trace+proc",
+            "status": "ok",
+            "detail": {
+              "syscall_time_s": {},
+              "bytes": {
+                "read_bytes": 0,
+                "write_bytes": 19181568
+              }
+            }
+          },
+          "imbalance": {
+            "value": 133.60893279382464,
+            "unit": "busy:idle (straggler thread)",
+            "source": "proc",
+            "status": "ok",
+            "detail": {
+              "per_thread": {
+                "1629": {
+                  "busy_ticks": 4043,
+                  "idle_ticks": 30.259952800003703,
+                  "ratio": 133.60893279382464
+                }
+              },
+              "straggler_tid": "1629",
               "clk_tck": 100
             }
           }
